@@ -1,0 +1,3 @@
+#excluyendo carpetas autogenerativas 
+node_modules
+vendor
