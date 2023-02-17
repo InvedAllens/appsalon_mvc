@@ -17,3 +17,6 @@
 .boton-rojo-block{
     @include m.boton(v.$rojo,block);
 }
+.boton-rojo{
+    @include m.boton(v.$rojo,inline-block);
+}

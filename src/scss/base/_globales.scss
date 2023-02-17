@@ -1,18 +1,30 @@
 @use 'base/variables' as v;
+@use 'base/mixins' as m;
 html {
     font-size: 62.5%;
     box-sizing: border-box;
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    @include m.tablet{
+        height:100%;
+    }
+    background-color: v.$negroOpaco;
+    color: v.$blanco;
+    
+    display: flex;
+    flex-direction: column;
+    font-family: v.$fuente_principal;
+    font-size: 1.6rem;
+    line-height: 1.8;
+    font-family: 'Roboto', sans-serif;
 }
 *, *:before, *:after {
     box-sizing: inherit;
 }
-body {
-    font-family: v.$fuente_principal;
-    font-size: 1.6rem;
-    line-height: 1.8;
-}
 p {
-    color: v.$negro;
     font-size: 2rem;
 }
 .contenedor {
@@ -27,7 +39,7 @@ a {
 
 img,
 picture {
-    width: 100%;
+    max-width: 100%;
     display: block;
 }
 

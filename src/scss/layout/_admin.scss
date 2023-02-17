@@ -1,0 +1,53 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.cita{
+
+    list-style: none;
+    border-top: 1px solid v.$gris;
+    p{
+        font-weight: v.$bold;
+        color:v.$azul;
+        margin-block-start:0.5em;
+        margin-block-end: 0.5em;
+    }
+    span,.servicio{
+        color:v.$blanco;
+        font-weight: v.$regular;
+    }
+    .servicio{
+        span{
+            color:v.$azul; 
+        }
+    }
+
+}
+.servicios{
+    form{
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+}
+.servicio{
+    @extend .cita;
+
+}
+.boton-rojo{
+    display: block;
+    width: 100%;
+    @include m.tablet{
+        display:inline-block;
+        width: auto;      
+    }
+} 
+
+.boton{
+    &.actualizar{
+        line-height: normal;
+    }
+}
+.servicio{
+    .acciones{
+        margin-top: 2rem;
+    }
+}

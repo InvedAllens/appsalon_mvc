@@ -1,0 +1,17 @@
+@use 'base/variables' as v;
+.seccion-resumen{
+    h3{
+        font-weight: v.$bold;
+    }
+    p{
+        font-weight: v.$bold;
+    }
+    span{
+        color:v.$azul;
+        font-weight: v.$bold;
+    }
+}
+.contenedor-servicio{
+    margin-bottom: 1rem;
+    border-bottom: 1px solid v.$gris;
+}

@@ -1,0 +1,10 @@
+@use 'base/variables' as v;
+
+.nombre-pagina{
+    text-align: center;
+    margin: 3rem 0;
+    font-weight: v.$bold;
+}
+.descripcion-pagina{
+    text-align: center;
+}

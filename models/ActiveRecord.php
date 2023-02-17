@@ -6,10 +6,10 @@
 
         protected static $db;
         protected static $columnasDb=[];
-        protected static $errores=[];
+        protected static $alertas=[];
         protected static $tabla='';
        
-        public $imagen;
+        //public $imagen;
         
         
         public function guardar(){
@@ -32,25 +32,31 @@
 
             //primero accedemos a la propiedad estatica, que ya ha sido establecida desde app.php con el metodo publico estatico
             //setDb, se le asigno la conexion o un objeto de la clase mysqli con las credenciales de la conexion(base de datos, usuario etc.)
-            $resultado=self::$db->query($query);
+            $resultado['guardado']=self::$db->query($query);
+            $resultado['id']=self::$db->insert_id;;
             return $resultado;
         }
         public function eliminar(){
-            if(static::$tabla==='propiedades'){
-                $idtabla="idpropiedad";
-            }elseif(static::$tabla==='vendedores'){
-                $idtabla="idvendedor";
+            if(static::$tabla==='usuarios'){
+                $idtabla="idusuario";
+            }elseif(static::$tabla==='citas'){
+                $idtabla="idcita";
+            }elseif(static::$tabla==='citasservicios'){
+                $idtabla="idcita";
+            }elseif(static::$tabla==='servicios'){
+                $idtabla="idservicio";
             }
             $id=self::$db->escape_string($this->$idtabla);
             $consultaEliminar="DELETE FROM ".static::$tabla." WHERE ".$idtabla."=$id";
             $resultado=self::$db->query($consultaEliminar);
-            if(isset($this->$idtabla)){
-                $existeArchivo=file_exists(CARPETA_IMAGENES.$this->imagen);
-                // debugear($existeArchivo);
-                if($existeArchivo){
-                    unlink(CARPETA_IMAGENES.$this->imagen);
-                }
-            }
+            //DESCOMENTAR PARA IMAGENES
+            // if(isset($this->$idtabla)){
+            //     $existeArchivo=file_exists(CARPETA_IMAGENES.$this->imagen);
+            //     // debugear($existeArchivo);
+            //     if($existeArchivo){
+            //         unlink(CARPETA_IMAGENES.$this->imagen);
+            //     }
+            // }
 
             if($resultado){
                 header('Location:/admin?resultado=3');
@@ -65,11 +71,16 @@
         }
      //funcion para copiar las propiedades del objeto en un array(propiedad y valor), se utilizara para otras funciones como sanitizar
         public function atributos(){
-            if(static::$tabla==='propiedades'){
-                $idtabla="idpropiedad";
-            }elseif(static::$tabla==='vendedores'){
-                $idtabla="idvendedor";
+            if(static::$tabla==='usuarios'){
+                $idtabla="idusuario";
+            }elseif(static::$tabla==='citas'){
+                $idtabla="idcita";
+            }elseif(static::$tabla==='citasservicios'){
+                $idtabla="idCS";
+            }elseif(static::$tabla==='servicios'){
+                $idtabla='idservicio';
             }
+
             $atributos=[];
             foreach(static::$columnasDb as $columna):
                 if($columna===$idtabla){continue;}
@@ -85,35 +96,41 @@
             endforeach;
             return $sanitizados;
         }
+    //establece alertas
+    public static function setAlerta($tipo,$mensaje){
+        static::$alertas[$tipo][]=$mensaje;
+    }
     //funcion para obtener los errores
-        public static function getErrores(){
-           return static::$errores;
+        public static function getAlertas(){
+           return static::$alertas;
         }
     //funcion para validar los valores de los atributos del objeto
         public function validar(){
-           static::$errores=[];
+           static::$alertas=[];
                 
         }
     //asigna una imagen(nombre imagen) al atributo imagen
-        public function setImagen($imagen){
-            if(static::$tabla==='propiedades'){
-                $idtabla="idpropiedad";
-            }elseif(static::$tabla==='vendedores'){
-                $idtabla="idvendedor";
-            }
-            //para actualizar se verifica si existe un hay id en la instancia, deberia haberla
-            if(!is_null($this->$idtabla)){
-                $existeArchivo=file_exists(__DIR__.'/../imagenes/'.$this->imagen);
-                // debugear($existeArchivo);
-                if($existeArchivo){
-                    unlink(__DIR__.'/../imagenes/'.$this->imagen);
-                }
-            }
 
-            if($imagen){
-                $this->imagen=$imagen;
-            }
-        }
+    //-------DESCOMENTAR PARA IMAGENES------
+        // public function setImagen($imagen){
+        //     if(static::$tabla==='propiedades'){
+        //         $idtabla="idpropiedad";
+        //     }elseif(static::$tabla==='vendedores'){
+        //         $idtabla="idvendedor";
+        //     }
+        //     //para actualizar se verifica si existe un hay id en la instancia, deberia haberla
+        //     if(!is_null($this->$idtabla)){
+        //         $existeArchivo=file_exists(__DIR__.'/../imagenes/'.$this->imagen);
+        //         // debugear($existeArchivo);
+        //         if($existeArchivo){
+        //             unlink(__DIR__.'/../imagenes/'.$this->imagen);
+        //         }
+        //     }
+
+        //     if($imagen){
+        //         $this->imagen=$imagen;
+        //     }
+        // }
     //funcion estatica para obtener todos los registros de propiedadades
         public static function all(){
             $query="SELECT * FROM ".static::$tabla;
@@ -152,15 +169,38 @@
         }
 
         public static function find($id){
-            if(static::$tabla==='propiedades'){
-                $idtabla="idpropiedad";
-            }elseif(static::$tabla==='vendedores'){
-                $idtabla="idvendedor";
+            if(static::$tabla==='usuarios'){
+                $idtabla="idusuario";
+            }elseif(static::$tabla==='citas'){
+                $idtabla="idcita";
+            }elseif(static::$tabla==='citasservicios'){
+                $idtabla="idcita";
+            }elseif(static::$tabla==='servicios'){
+                $idtabla="idservicio";
             }
            $query="SELECT * FROM ".static::$tabla." WHERE ".$idtabla."=$id";
            $resultado=self::consultaSQL($query);
            return  current($resultado);            
         }
+        //funcion para encontrar todo un resgistro en funcion de su campo y valor
+        public static function where($campo,$valor){
+            if(static::$tabla==='usuarios'){
+                $idtabla="idusuario";
+            }elseif(static::$tabla==='citas'){
+                $idtabla="idcita";
+            }
+           $query="SELECT * FROM ".static::$tabla." WHERE ".$campo."='".$valor."' LIMIT 1";
+           //debugear($query);
+           $resultado=self::consultaSQL($query);
+           return  current($resultado);            
+        }
+
+        //funcion para una consulta general a la base de datos
+        public static function SQL($query){
+            $resultado=self::consultaSQL($query);
+            return $resultado;
+        }
+
         public function sincronizar($args){
             foreach($args as $key=>$value):
                 if(property_exists($this,$key) && !is_null($value)):
@@ -170,10 +210,14 @@
             return $this;
         }
         public function actualizar(){
-            if(static::$tabla==='propiedades'){
-                $idtabla="idpropiedad";
-            }elseif(static::$tabla==='vendedores'){
-                $idtabla="idvendedor";
+            if(static::$tabla==='usuarios'){
+                $idtabla="idusuario";
+            }elseif(static::$tabla==='citas'){
+                $idtabla="idcita";
+            }elseif(static::$tabla==='citasservicios'){
+                $idtabla="idCS";
+            }elseif(static::$tabla==='servicios'){
+                $idtabla='idservicio';
             }
             //primero hay que sanitizar los datos denuevo
             $sanitizados=$this->sanitizar();

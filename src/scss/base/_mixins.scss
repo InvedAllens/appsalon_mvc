@@ -25,6 +25,7 @@
     grid-template-columns: repeat($columnas, 1fr);
 }
 @mixin boton($bg-color,$display){
+    font-family: v.$fuente_principal;
     background-color: $bg-color;
     color: v.$blanco;
     font-weight: bold;

@@ -1,4 +1,5 @@
 <?php
+    define('CARPETA_IMAGENES',$_SERVER['DOCUMENT_ROOT'].'/imagenes/');
 
     function debugear($variable){
         echo '<pre>';
@@ -15,4 +16,15 @@
     function s($html):string{
         $s=htmlspecialchars($html);
         return $s;
+    }
+
+    function isAuth():void{
+        if(!isset($_SESSION['login'])){
+            header('Location:/login');
+        }
+    }
+    function isAdmin():void{
+        if(!isset($_SESSION['admin'])){
+            header('Location:/login');
+        }
     }
