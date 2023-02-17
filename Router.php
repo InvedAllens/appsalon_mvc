@@ -4,8 +4,8 @@
     class Router{
         public $rutasGET=[];
         public $rutasPOST=[];
-        protected $rutasProtegidas=['/admin','/propiedades/crear','/propiedades/actualizar','/vendedores/crear',
-                                    '/vendedores/actualizar',
+        protected $rutasProtegidas=['/admin','/servicios/crear','/servicios/actualizar','/servicios/eliminar',
+                                    '/servicios',
                                 ];
         
         //establece una funcion para una url (esto para un metodo get/cargar pagina )
@@ -21,19 +21,19 @@
             $autenticado=$_SESSION['login'] ?? null;
             $fn=null;
             //se obtienen los parametros de url y metodoatraves del server 
-            $urlActual=$_SERVER['PATH_INFO'];
+            $urlActual=$_SERVER['PATH_INFO']=='' ? '/login' : $_SERVER['PATH_INFO'];// REQUEST_URI === '' ? '/login' : $_SERVER['REQUEST_URI']; PATH_INFO
             $metodo=$_SERVER['REQUEST_METHOD'];
             // debugear($_SERVER['REQUEST_METHOD']);
             if(in_array($urlActual,$this->rutasProtegidas) && !$autenticado){
-                header('Location:/index');
+                header('Location:/login');
             }
 
             //solo si es un metodo get, se obtiene la funcion del arreglo para ejecutarlo posteriormente
             if($metodo==='GET'){
                 
-                $fn=$this->rutasGET[$urlActual];  
+                $fn=$this->rutasGET[$urlActual] ?? null;
             }elseif($metodo==='POST'){
-                $fn=$this->rutasPOST[$urlActual];
+                $fn=$this->rutasPOST[$urlActual] ?? null;
             }
             //  debugear($fn);
             //si existe la url se utiliza un callback a la funcion asosciada a la url y metodo

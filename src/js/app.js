@@ -114,7 +114,7 @@ function mostrarServicios(servicios){
     servicios.forEach(servicio =>{
 
         const {idservicio,nombre,precio}=servicio;
-        console.log(idservicio);
+        //console.log(idservicio);
         const nombreServicio=document.createElement('P');
         nombreServicio.classList.add("nombre-servicio");
         nombreServicio.textContent=nombre;
@@ -136,7 +136,7 @@ function mostrarServicios(servicios){
         const servicios=document.querySelector("#servicios");
         servicios.appendChild(servicioDiv);
 
-        console.log(servicioDiv);
+        //console.log(servicioDiv);
         
 
     });
@@ -185,11 +185,11 @@ function seleccionarFecha(){
     const fecha=document.querySelector("#fecha");
     fecha.addEventListener("input",e=>{
         const dia=new Date(e.target.value).getUTCDay();
-        console.log(dia);
+        //console.log(dia);
         if([0,6].includes(dia)){
             e.target.value='';
             mostrarAlerta("Fines de semana no permitidos",'error','form');
-            console.log("No Abrimos sabados y domingos")
+            //console.log("No Abrimos sabados y domingos")
         }else{
             cita.fecha=e.target.value;
         }
@@ -207,7 +207,7 @@ function seleccionarHora(){
         }else{
             cita.hora=e.target.value;
         }
-        console.log(hora);
+        //console.log(hora);
     });
 }
 
@@ -238,7 +238,7 @@ function mostrarResumen(){
     }
     if(Object.values(cita).includes('')||cita.servicios.length<1){
         mostrarAlerta('Hacen falta datos de servicio, fecha u hora','error','seccion-resumen',false);
-        console.log("Hacen falta datos para realizar la cita");
+        //console.log("Hacen falta datos para realizar la cita");
         return;
     }
     const resumenHeading=document.createElement('H3');
@@ -301,7 +301,7 @@ async function reservarCita(){
     data.append('hora',hora);
     data.append('usuarioId',idusuario);
     data.append('servicios',idServicios);
-    console.log([...data]);
+    //console.log([...data]);
 
     try {
         const url='http://localhost:3000/api/citas';
@@ -310,7 +310,7 @@ async function reservarCita(){
         body:data
         });
         const resultado=await respuesta.json();
-        console.log(resultado.guardado);
+        //console.log(resultado.guardado);
         if(resultado.guardado){
             Swal.fire({
                 icon: 'success',
@@ -338,12 +338,3 @@ async function reservarCita(){
     }
     
 }
-
-// function buscarCitas(){
-//     const fecha=document.querySelector('#fecha');
-//     fecha.addEventListener('input', function(e){
-//         const fechaSeleccionada = e.target.value;
-//         console.log(fechaSeleccionada);
-//         window.location="?fecha="+fechaSeleccionada;
-//     });
-// }

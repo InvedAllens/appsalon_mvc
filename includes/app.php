@@ -1,7 +1,11 @@
 <?php 
+    require __DIR__.'/../vendor/autoload.php';
+    $dotenv=Dotenv\Dotenv::createImmutable(__DIR__);
+    $dotenv->safeLoad();
+
     require 'funciones.php';
     require 'database.php';
-    require __DIR__.'/../vendor/autoload.php';
+    
     use Model\ActiveRecord;
     $db=conexionDataBase();
    $db->set_charset('utf8');
