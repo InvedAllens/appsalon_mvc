@@ -16,7 +16,7 @@
     require_once __DIR__.'/includes/app.php';
     $router=new Router();
     //rutas para el login 
-    $router->get(__DIR__.'/login',[LoginController::class,"login"]);
+    $router->get('/login',[LoginController::class,"login"]);
     $router->post('/login',[LoginController::class,"login"]);
     $router->get('/logout',[LoginController::class,"logout"]);
     //rutas para recuperar contraseña
