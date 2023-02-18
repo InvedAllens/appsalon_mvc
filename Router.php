@@ -21,21 +21,19 @@
             session_start();
             $autenticado=$_SESSION['login'] ?? null;
             $fn=null;
-            debugear($_SERVER);
             //se obtienen los parametros de url y metodoatraves del server 
             $_SERVER['REQUEST_URI']="/login";
-            $urlActual=$_SERVER['REQUEST_URI'];//=="" ? '/login':$_SERVER['REQUEST_URI'];// REQUEST_URI === '' ? '/login' : $_SERVER['REQUEST_URI']; PATH_INFO
+            $urlActual=$_SERVER['REQUEST_URI'];=="/" ? '/login':$_SERVER['REQUEST_URI'];// REQUEST_URI === '' ? '/login' : $_SERVER['REQUEST_URI']; PATH_INFO
             $metodo=$_SERVER['REQUEST_METHOD'];
-            // debugear($_SERVER['REQUEST_METHOD']);
             if(in_array($urlActual,$this->rutasProtegidas) && !$autenticado){
                 header('Location:/login');
             }
             
             //solo si es un metodo get, se obtiene la funcion del arreglo para ejecutarlo posteriormente
             if($metodo=='GET'){
-                $fn=$this->rutasGET[$urlActual] ?? null;
+                $fn= $this->rutasGET[$urlActual] ?? null;
             }elseif($metodo=='POST'){
-                $fn=$this->rutasPOST[$urlActual] ?? null;
+                $fn= $this->rutasPOST[$urlActual] ?? null;
             }
              debugear($fn);
             //si existe la url se utiliza un callback a la funcion asosciada a la url y metodo
