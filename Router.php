@@ -39,7 +39,7 @@
                 debugear("es un metodo post");
                 $fn=$this->rutasPOST[$urlActual] ?? null;
             }
-            //  debugear($fn);
+             debugear($fn);
             //si existe la url se utiliza un callback a la funcion asosciada a la url y metodo
             //$fn=[LoginController::class,'login'];
             if($fn){
