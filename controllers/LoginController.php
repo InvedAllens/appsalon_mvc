@@ -45,7 +45,7 @@ use Classes\Email;
 
             }
 
-            $router->render(__DIR__."/auth/login",["alertas"=>$alertas]);
+            $router->render("/auth/login",["alertas"=>$alertas]);
             // echo "desde login";
         }
         public static function logout(){
