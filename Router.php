@@ -23,7 +23,7 @@
             $fn=null;
             //se obtienen los parametros de url y metodoatraves del server 
             $_SERVER['REQUEST_URI']="/login";
-            $urlActual=$_SERVER['REQUEST_URI'];=="/" ? '/login':$_SERVER['REQUEST_URI'];// REQUEST_URI === '' ? '/login' : $_SERVER['REQUEST_URI']; PATH_INFO
+            $urlActual=$_SERVER['REQUEST_URI']=="/" ? '/login':$_SERVER['REQUEST_URI'];// REQUEST_URI === '' ? '/login' : $_SERVER['REQUEST_URI']; PATH_INFO
             $metodo=$_SERVER['REQUEST_METHOD'];
             if(in_array($urlActual,$this->rutasProtegidas) && !$autenticado){
                 header('Location:/login');
