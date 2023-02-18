@@ -29,13 +29,13 @@
             if(in_array($urlActual,$this->rutasProtegidas) && !$autenticado){
                 header('Location:/login');
             }
-
+            
             //solo si es un metodo get, se obtiene la funcion del arreglo para ejecutarlo posteriormente
             if($metodo=='GET'){
-                echo "es un metodo get";
+                debugear("es un metodo get");
                 $fn=$this->rutasGET[$urlActual] ?? null;
             }elseif($metodo=='POST'){
-                echo "es un metodo post";
+                debugear("es un metodo post");
                 $fn=$this->rutasPOST[$urlActual] ?? null;
             }
             //  debugear($fn);
