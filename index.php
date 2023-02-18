@@ -13,7 +13,7 @@
     use Controllers\AdminController;
     use Controllers\ServicioController;
 
-    require_once __DIR__.'/../includes/app.php';
+    require_once __DIR__.'/includes/app.php';
     $router=new Router();
     //rutas para el login 
     $router->get('/login',[LoginController::class,"login"]);
