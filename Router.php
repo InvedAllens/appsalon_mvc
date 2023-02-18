@@ -19,6 +19,8 @@
         //ejecuta las funciones dependiendo la url y el metodo asociado
         public function comprobarRutas(){
             session_start();
+            
+            debugear($this->rutasGet);
             $autenticado=$_SESSION['login'] ?? null;
             $fn=null;
             //debugear($_SERVER);
