@@ -32,14 +32,13 @@
 
             //solo si es un metodo get, se obtiene la funcion del arreglo para ejecutarlo posteriormente
             if($metodo==='GET'){
-                
                 $fn=$this->rutasGET[$urlActual] ?? null;
             }elseif($metodo==='POST'){
                 $fn=$this->rutasPOST[$urlActual] ?? null;
             }
             //  debugear($fn);
             //si existe la url se utiliza un callback a la funcion asosciada a la url y metodo
-            $fn=[LoginController::class,'login'];
+            //$fn=[LoginController::class,'login'];
             if($fn){
                 call_user_func($fn,$this);
             }else{
