@@ -20,6 +20,7 @@
             session_start();
             $autenticado=$_SESSION['login'] ?? null;
             $fn=null;
+            debugear($_SERVER);
             //se obtienen los parametros de url y metodoatraves del server 
             $urlActual=$_SERVER['REQUEST_URI']==='' ? '/login' : $_SERVER['REQUEST_URI'];// REQUEST_URI === '' ? '/login' : $_SERVER['REQUEST_URI']; PATH_INFO
             $metodo=$_SERVER['REQUEST_METHOD'];
