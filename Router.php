@@ -20,7 +20,7 @@
         public function comprobarRutas(){
             session_start();
             
-            debugear($this->rutasGet);
+            debugear($this->rutasGET);
             $autenticado=$_SESSION['login'] ?? null;
             $fn=null;
             //debugear($_SERVER);
