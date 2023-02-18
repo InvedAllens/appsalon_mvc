@@ -6,4 +6,8 @@ gulpfile.js
 package.json
 package-lock.json
 .env
+<<<<<<< HEAD
 Procfile
+=======
+Procfile
+>>>>>>> 42cad08541cd11813f49d3aefb125605a92f4d34
