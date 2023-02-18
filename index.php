@@ -1,11 +1,5 @@
 <?php
 
-
-    //use Model\Propiedad;
-    
-    // use Controllers\PropiedadController;
-    // use Controllers\VendedorController;
-    // use Controllers\PaginasController;
     use MVC\Router;
     use Controllers\LoginController;
     use Controllers\ClienteController;
