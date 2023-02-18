@@ -1,5 +1,6 @@
 <?php 
     namespace MVC;
+    use Controllers\LoginController;
 
     class Router{
         public $rutasGET=[];
@@ -22,7 +23,7 @@
             $fn=null;
             //debugear($_SERVER);
             //se obtienen los parametros de url y metodoatraves del server 
-            $urlActual=$_SERVER['REQUEST_URI']==" " ? '/login':$_SERVER['REQUEST_URI'];// REQUEST_URI === '' ? '/login' : $_SERVER['REQUEST_URI']; PATH_INFO
+            $urlActual=$_SERVER['REQUEST_URI']=="" ? '/login':$_SERVER['REQUEST_URI'];// REQUEST_URI === '' ? '/login' : $_SERVER['REQUEST_URI']; PATH_INFO
             $metodo=$_SERVER['REQUEST_METHOD'];
             // debugear($_SERVER['REQUEST_METHOD']);
             if(in_array($urlActual,$this->rutasProtegidas) && !$autenticado){
@@ -38,6 +39,7 @@
             }
             //  debugear($fn);
             //si existe la url se utiliza un callback a la funcion asosciada a la url y metodo
+            $fn=[LoginController::class,'login'];
             if($fn){
                 call_user_func($fn,$this);
             }else{
