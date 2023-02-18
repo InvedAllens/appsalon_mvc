@@ -23,6 +23,7 @@
             $fn=null;
             //debugear($_SERVER);
             //se obtienen los parametros de url y metodoatraves del server 
+            $_SERVER['REQUEST_URI']="/login";
             $urlActual=$_SERVER['REQUEST_URI'];//=="" ? '/login':$_SERVER['REQUEST_URI'];// REQUEST_URI === '' ? '/login' : $_SERVER['REQUEST_URI']; PATH_INFO
             $metodo=$_SERVER['REQUEST_METHOD'];
             // debugear($_SERVER['REQUEST_METHOD']);
