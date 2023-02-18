@@ -1,6 +1,6 @@
 <?php 
     namespace MVC;
-    use Controllers\LoginController;
+    //use Controllers\LoginController;
 
     class Router{
         public $rutasGET=[];
@@ -35,7 +35,7 @@
             }elseif($metodo=='POST'){
                 $fn= $this->rutasPOST[$urlActual] ?? null;
             }
-             debugear($fn);
+             //debugear($fn);
             //si existe la url se utiliza un callback a la funcion asosciada a la url y metodo
             //$fn=[LoginController::class,'login'];
             if($fn){
