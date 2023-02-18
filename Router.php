@@ -32,7 +32,7 @@
             }
             
             //solo si es un metodo get, se obtiene la funcion del arreglo para ejecutarlo posteriormente
-            if($metodo=='GET')
+            if($metodo=='GET'){
                 $fn=$this->rutasGET[$urlActual] ?? null;
             }elseif($metodo=='POST'){
                 $fn=$this->rutasPOST[$urlActual] ?? null;
