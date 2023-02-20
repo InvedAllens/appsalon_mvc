@@ -3,7 +3,7 @@
 
 use Exception;
 use Model\AdminCita;
-use Model\servicio;
+use Model\Servicio;
     use Model\Cita;
 use Model\CitaServicio;
 
